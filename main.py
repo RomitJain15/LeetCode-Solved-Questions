@@ -11,6 +11,9 @@ from webdriver_manager.chrome import ChromeDriverManager
 # ---------------------------------------------
 import gspread
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 siteUrl = 'https://leetcode.com/problemset/all/'
 solvedQuestionNameList = []
@@ -45,9 +48,9 @@ def sign_in(driver):
     sign_in_button.click()
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, 'signin_btn')))
     email_input = driver.find_element(By.ID, 'id_login')
-    email_input.send_keys('jainromit15@gmail.com')
+    email_input.send_keys(os.getenv('LEETCODE_EMAIL'))
     password_input = driver.find_element(By.ID, 'id_password')
-    password_input.send_keys('Romit@1508')
+    password_input.send_keys(os.getenv('LEETCODE_PASSWORD'))
     time.sleep(1)
     login_button = driver.find_element(By.ID, 'signin_btn')
     login_button.click()
